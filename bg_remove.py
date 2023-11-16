@@ -1,18 +1,22 @@
-import streamlit as st
-from rembg import remove
-from PIL import Image
+# Standard library imports
 from io import BytesIO
 import base64
+
+# Related third party imports
+from PIL import Image
+import streamlit as st
+from rembg import remove
+
 
 st.set_page_config(layout="wide", page_title="Image Background Remover")
 
 st.write("## Remove background from your image")
 st.write(
-    ":dog: Try uploading an image to watch the background magically removed. Full quality images can be downloaded from the sidebar. This code is open source and available [here](https://github.com/tyler-simons/BackgroundRemoval) on GitHub. Special thanks to the [rembg library](https://github.com/danielgatis/rembg) :grin:"
+    "Upload an Image and then, Full quality images can be downloaded from the sidebar.:grin:"
 )
 st.sidebar.write("## Upload and download :gear:")
 
-MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
+MAX_FILE_SIZE = 20 * 1024 * 1024  # 20MB
 
 # Download the fixed image
 def convert_image(img):
@@ -39,8 +43,8 @@ my_upload = st.sidebar.file_uploader("Upload an image", type=["png", "jpg", "jpe
 
 if my_upload is not None:
     if my_upload.size > MAX_FILE_SIZE:
-        st.error("The uploaded file is too large. Please upload an image smaller than 5MB.")
+        st.error("The uploaded file is too large. Please upload an image smaller than 20MB.")
     else:
         fix_image(upload=my_upload)
 else:
-    fix_image("./zebra.jpg")
+    fix_image("./lord.png")
